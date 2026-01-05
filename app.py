@@ -1,8 +1,7 @@
 import os
 import gradio as gr
-from agent.orchestrator import run_agent
+from agent.orchestrator import run_agent   
 
-# Predefined high‑impact business questions
 PRESET_QUESTIONS = [
     "Analyze Gatorade’s performance last quarter and identify key drivers.",
     "What strategic opportunities should Gatorade prioritize next quarter?",
@@ -15,10 +14,11 @@ PRESET_QUESTIONS = [
 ]
 
 def load_question(selected):
-    return selected  # fills the textbox with the selected question
+    return selected
 
 def chat(user_input):
-    return run_agent(user_input)
+    response = run_agent(user_input)
+    return str(response)
 
 with gr.Blocks(title="PepsiCo AI Agent") as demo:
     gr.Markdown("### PepsiCo Business Insight Agent\nSelect a question or type your own.")
@@ -44,4 +44,3 @@ with gr.Blocks(title="PepsiCo AI Agent") as demo:
 
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=7860)
-
